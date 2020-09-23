@@ -41,4 +41,5 @@ Roughly speaking, this patch replaces sections **74 1F 48 63 D0** to **33 C0 48 
 ## Special thanks
 
 NShut (https://www.cyberforum.ru/windows10/thread2466696.html#post14150170) - for data that helped automate the patching process
+
 Waysek (https://www.cyberforum.ru/windows10/thread2466696-page2.html#post14410402) - for the base of .bat file posted in the final release of this repository
