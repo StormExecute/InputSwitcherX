@@ -19,6 +19,10 @@ python createPatch.py
 ```
 6. At the output, you should get the output directory with the edited InputSwitch.dll. It remains to replace the original InputSwitch.dll in the system directory. To do this, **run setPatch.bat as administrator**.
 
+## Another patching way
+
+If you have Windows 10 2004 - you can just download InputSwitch2004Output.dll from [here](https://github.com/StormExecute/InputSwitcherX/releases/tag/v1.0.0), then rename it to InputSwitch.dll, move to output folder and **run setPatch.bat as administrator**
+
 <a name="descAndNodes"></a>
 ## Description and Notes
 
