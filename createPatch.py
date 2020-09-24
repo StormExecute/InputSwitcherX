@@ -1,5 +1,5 @@
 from sys import exit as sysExit
-from binascii import unhexlify
+from binascii import unhexlify, hexlify
 from os import path as osPath, makedirs as osMakedirs
 
 def make_dirs(dest):
@@ -8,7 +8,7 @@ def make_dirs(dest):
 
 with open('./input/InputSwitch.dll', 'rb') as f:
 
-    hexdata = f.read().hex()
+    hexdata = hexlify(f.read()).decode("utf-8")
     
     i = 0
     pointer = 0
@@ -51,12 +51,7 @@ with open('./input/InputSwitch.dll', 'rb') as f:
             inARow += 1
         elif inARow == 5:
             
-            hexAsList[i] = "90"
-            hexAsList[i - 1] = "90"
-            hexAsList[i - 2] = "90"
-            hexAsList[i - 3] = "90"
-            hexAsList[i - 4] = "90"
-            hexAsList[i - 5] = "90"
+            for lasts in range(6): hexAsList[i - lasts] = "90"
             inNopSet = 1
             inARow = 6
             
@@ -76,3 +71,4 @@ with open('./input/InputSwitch.dll', 'rb') as f:
             fout.write(unhexlify(h))
             
     print("Done!")
+    sysExit(0)
