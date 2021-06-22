@@ -24,7 +24,7 @@ IF %ERRORLEVEL% EQU 0 (
     
     ) else (
     
-        echo Run python createPatch.py first!
+        echo Copy InputSwitch.dll to output first!
         pause
     
     )
