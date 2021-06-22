@@ -9,22 +9,28 @@
 ```bash
 git clone https://github.com/StormExecute/InputSwitcherX.git && cd InputSwitcherX
 ```
-4. Copy your original InputSwitch.dll file from %windir%\system32\InputSwitch.dll to /InputSwitcherX/input/ . This can be done with this command:
+4. Apply the patch with the following command :
 ```bash
-copy %windir%\system32\InputSwitch.dll input\InputSwitch.dll /Y
+python usePatch.py
 ```
-5. Create a patch based on your InputSwitch.dll file using the command:
+
+## Roll back the patch
+
+Requires a directory "backup":
+
 ```bash
-python createPatch.py
+python offPatch.py
 ```
-6. At the output, you should get the output directory with the edited InputSwitch.dll. It remains to replace the original InputSwitch.dll in the system directory. To do this, **run setPatch.bat as administrator**.
 
-## Another patching way
+## Another patching way (old)
 
-If you have Windows 10 2004 - you can just download InputSwitch2004Output.dll from [here](https://github.com/StormExecute/InputSwitcherX/releases/tag/v1.0.0), then rename it to InputSwitch.dll, move to output folder and **run setPatch.bat as administrator**
+If you have Windows 10 2004 - you can just download InputSwitch2004Output.dll from [here](https://github.com/StormExecute/InputSwitcherX/releases/tag/v1.0.0), then rename it to InputSwitch.dll, move to output folder in InputSwitcherX directory and **run setPatch.bat as administrator**
 
-<a name="descAndNodes"></a>
+<div id='descAndNodes'></div>
+
 ## Description and Notes
+
+*Starting from version 1.1.0 the patch is also applied to the InputSwitch.dll files found in %windir%\winsxs\ and subdirectories that have inputswitch in the name. In addition, an experimental patch has been applied for inconsistent values between **FF FF 83 F8 FF** and **33 C0 8B**.*
 
 This is patcher for %windir%\system32\InputSwitch.dll . Its main purpose is to prevent the language switching animation from appearing.
 
@@ -34,13 +40,13 @@ To accomplish its task - the patch overwrites some hex data, which is responsibl
 
 Regarding which hex data the patch rewrites. First of all, the details described in a special forum topic dedicated to this problem were taken into account - https://www.cyberforum.ru/windows10/thread2466696.html#post14150170 .
 
-Comparing the differences between the patched and the original files, duplicate hex sections were identified that begin with **FF FF 83 F8 FF** and continue like **74 1F 48 63 D0**.
+Comparing the differences between the patched and the original files, duplicate hex sections were identified that begin with **FF FF 83 F8 FF** and continue like **74 1F 48 63 D0** (not always).
 
-The continuing hex data in the patched file has been replaced with a void that continues until the next combination: **33 C0 48 8B**.
+The continuing hex data in the patched file has been replaced with a void that continues until the next combination: **33 C0 48 or 8B**.
 
 Based on the fact that the void in the file after the fix solves the original problem - replacing the same sections in the new version of the file should bring the desired result.
 
-Roughly speaking, this patch replaces sections **74 1F 48 63 D0** to **33 C0 48 8B** with *90*, which is a void.
+Roughly speaking, this patch replaces sections after **FF FF 83 F8 FF** to **33 C0 48 or 8B** with *90*, which is a void.
 
 ## Special thanks
 
